@@ -4,7 +4,7 @@ version: 2.1
 
   # orbs:
   # The Node.js orb contains a set of prepackaged CircleCI configuration you can utilize
-  # Orbs reduce the amount of configuration required for common tasks.
+# Orbs reduce the amount of configuration required for common tasks.
 # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/node
 # node: circleci/node@4.7
 
@@ -55,7 +55,6 @@ aliases:
 jobs:
   build:
     executor: app-executor
-
     steps:
       - checkout
       - *show-current-branch-name
@@ -93,15 +92,15 @@ jobs:
       - run:
         name: Deploy to AWS Cloudfront
         command: |
-          aws configure set preview.cloudfront
+          aws configure set preview.cloudfront true
           if [ "${CIRCLE_BRANCH}" == "main" ]
           then
-          aws cloudfront create-invalidation --distribution-id ${PRODUCTION_DISTRIBUTION_ID} --paths /\* 
+            aws cloudfront create-invalidation --distribution-id ${PRODUCTION_DISTRIBUTION_ID} --paths /\* 
           elif [ "${CIRCLE_BRANCH}" == "staging" ]
           then
-          aws cloudfront create-invalidation --distribution-id ${STAGING_DISTRIBUTION_ID} --paths /\*
+            aws cloudfront create-invalidation --distribution-id ${STAGING_DISTRIBUTION_ID} --paths /\*
           else
-          aws cloudfront create-invalidation --distribution-id ${DEV_DISTRIBUTION_ID} --paths /\*
+            aws cloudfront create-invalidation --distribution-id ${DEV_DISTRIBUTION_ID} --paths /\*
           fi
 
 workflows:
