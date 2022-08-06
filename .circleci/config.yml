@@ -15,7 +15,7 @@ executors:
     working_directory: ~/repo
 aliases:
   - &show-current-branch-name
-    - run:
+    run:
         name: Show current branch
         command: echo ${CIRCLE_BRANCH}
   - &restore-cache
@@ -24,7 +24,7 @@ aliases:
         - app-{{ checksum "package.json" }}
         - app-
   - &install-dependencies
-    - run:
+    run:
         name: Install dependencies
         command: |
           mkdir -p artifacts
@@ -35,7 +35,7 @@ aliases:
         - node_modules
       key: app-{{ checksum "package.json" }}
   - &install-aws-cli
-    - run:
+    run:
         name: Installing AWS CLI
         working_directory: /
         command: |
@@ -43,7 +43,7 @@ aliases:
           sudo apt-get install -y awscli
           sudo apt-get install -y python-pip python-dev build-essential
   - &build-project
-    - run:
+    run:
         name: Build Project
         command: |
           npm install
