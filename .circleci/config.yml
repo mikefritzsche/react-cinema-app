@@ -11,7 +11,7 @@ version: 2.1
 executors:
   app-executor:
     docker:
-      - image: circleci/node:15.5.0
+      - image: cimg/node:16.16
     working_directory: ~/repo
 aliases:
   - &show-current-branch-name
@@ -72,6 +72,8 @@ jobs:
       - run:
           name: Deploy to AWS S3
           command: |
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
             if [ "${CIRCLE_BRANCH}" == "main" ]
             then
               aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_PRODUCTION} --delete
