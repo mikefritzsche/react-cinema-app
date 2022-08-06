@@ -2,11 +2,11 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-# orbs:
+  # orbs:
   # The Node.js orb contains a set of prepackaged CircleCI configuration you can utilize
   # Orbs reduce the amount of configuration required for common tasks.
   # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/node
-  # node: circleci/node@4.7
+# node: circleci/node@4.7
 
 jobs:
   build:
@@ -16,19 +16,19 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Show current branch
-          command: echo ${CURRENT_BRANCH}
+        name: Show current branch
+        command: echo ${CURRENT_BRANCH}
       - restore_cache:
-          keys:
-            - app-{{ checksum "package.json" }}
-            - app-
+        keys:
+          - app-{{ checksum "package.json" }}
+          - app-
       - run:
-          name: Install Dependencies
-          command: npm install
+        name: Install Dependencies
+        command: npm install
       - save_cache:
-          paths:
-            - node_modules
-          key: app-{{ checksum "package.json" }}
+        paths:
+          - node_modules
+        key: app-{{ checksum "package.json" }}
 
   deploy-to-aws-s3:
     docker:
@@ -37,15 +37,15 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Show current branch
-          command: echo ${CURRENT_BRANCH}
+        name: Show current branch
+        command: echo ${CURRENT_BRANCH}
       - run:
-          name: Installing AWS CLI
-          working_directory: /
-          command: |
-            sudo apt-get -y -qq update
-            sudo apt-get install -y awscli
-            sudo apt-get install -y python-pip python-dev build-essential
+        name: Installing AWS CLI
+        working_directory: /
+        command: |
+          sudo apt-get -y -qq update
+          sudo apt-get install -y awscli
+          sudo apt-get install -y python-pip python-dev build-essential
       - run:
           name: Build Project
           command: |
@@ -67,9 +67,6 @@ jobs:
             else
               aws cloudfront create-invalidation --distribution-id ${DEV_DISTRIBUTION_ID} --paths /\*
             fi
-  
-      
-
 
   deploy-to-aws-cloudfront:
     docker:
@@ -78,37 +75,35 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Show current branch
-          command: echo ${CURRENT_BRANCH}
+        name: Show current branch
+        command: echo ${CURRENT_BRANCH}
       - run:
-          name: Installing AWS CLI
-          working_directory: /
-          command: |
-            sudo apt-get -y -qq update
-            sudo apt-get install -y awscli
-            sudo apt-get install -y python-pip python-dev build-essential
+        name: Installing AWS CLI
+        working_directory: /
+        command: |
+          sudo apt-get -y -qq update
+          sudo apt-get install -y awscli
+          sudo apt-get install -y python-pip python-dev build-essential
       - run:
-          name: Build Project
-          command: |
-            npm install
-            npm run build
-            cd build
-            zip ../build.zip -r * .[^.]*
-            echo "build successful"
+        name: Build Project
+        command: |
+          npm install
+          npm run build
+          cd build
+          zip ../build.zip -r * .[^.]*
+          echo "build successful"
       - run:
-          name: Deploy to AWS S3
-          command: |
-            if [ "${CURRENT_BRANCH}" == "main" ]
-            then
-              aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_PRODUCTION} --delete
-            elif [ "${CURRENT_BRANCH}" == "staging" ]
-            then
-              aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_STAGING} --delete
-            else
-              aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_DEV} --delete
-            fi
-
-
+        name: Deploy to AWS S3
+        command: |
+          if [ "${CURRENT_BRANCH}" == "main" ]
+          then
+            aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_PRODUCTION} --delete
+          elif [ "${CURRENT_BRANCH}" == "staging" ]
+          then
+            aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_STAGING} --delete
+          else
+            aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_DEV} --delete
+          fi
 
 workflows:
   build_and_deploy:
