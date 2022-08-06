@@ -1,15 +1,15 @@
 version: 2.1
 executors:
-  first-step:
-    run:
-      name: The First Step
-      command: |
-        echo 'Hello World!'
-        echo 'This is the delivery pipeline'
+  my-executor:
+    docker:
+      - image: alpine:3.15
 
 jobs:
   build:
-    docker:
-      - image: alpine:3.15
+    executor: my-executor
     steps:
-      executor: first-step
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
