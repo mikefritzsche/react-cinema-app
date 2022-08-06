@@ -5,7 +5,7 @@ version: 2.1
   # orbs:
   # The Node.js orb contains a set of prepackaged CircleCI configuration you can utilize
   # Orbs reduce the amount of configuration required for common tasks.
-  # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/node
+# See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/node
 # node: circleci/node@4.7
 
 executors:
@@ -73,10 +73,10 @@ jobs:
       - run:
         name: Deploy to AWS S3
         command: |
-          if [ "${CURRENT_BRANCH}" == "main" ]
+          if [ "${CIRCLE_BRANCH}" == "main" ]
           then
             aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_PRODUCTION} --delete
-          elif [ "${CURRENT_BRANCH}" == "staging" ]
+          elif [ "${CIRCLE_BRANCH}" == "staging" ]
           then
             aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_STAGING} --delete
           else
@@ -94,10 +94,10 @@ jobs:
         name: Deploy to AWS Cloudfront
         command: |
           aws configure set preview.cloudfront
-          if [ "${CURRENT_BRANCH}" == "main" ]
+          if [ "${CIRCLE_BRANCH}" == "main" ]
           then
           aws cloudfront create-invalidation --distribution-id ${PRODUCTION_DISTRIBUTION_ID} --paths /\* 
-          elif [ "${CURRENT_BRANCH}" == "staging" ]
+          elif [ "${CIRCLE_BRANCH}" == "staging" ]
           then
           aws cloudfront create-invalidation --distribution-id ${STAGING_DISTRIBUTION_ID} --paths /\*
           else
