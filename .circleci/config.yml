@@ -45,11 +45,11 @@ jobs:
             fi
 
 
-  deployment:
-    push_to_server:
-      branch: main
-      commands:
-        - rsync -avz _site/ u73769297@hamdelesalvele.com:/test
+#  deployment:
+#    push_to_server:
+#      branch: main
+#      commands:
+#        - rsync -avz _site/ u73769297@hamdelesalvele.com:/test
 workflows:
   build_and_deploy:
     jobs:
