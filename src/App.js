@@ -7,7 +7,6 @@ import Header from './components/header/Header'
 
 const App = () => {
   const [url, setUrl] = useState(null)
-  // const myOptions = useMemo(() => ({ url }), [url])
   const { data } = useFetch({ url })
 
   return (
