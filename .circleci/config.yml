@@ -91,23 +91,23 @@ jobs:
                     {
                       "type": "mrkdwn",
                       "text": "*Project*:\n${CIRCLE_PROJECT_REPONAME}"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Branch*:\n${CIRCLE_BRANCH}"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*When*:\n${date + '%m/%d/%Y %Y}"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Build*:\n${CIRCLE_BUILD_NUM}"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Build*:\n${CIRCLE_PROJECT_USERNAME}"
                     }
+#                    {
+#                      "type": "mrkdwn",
+#                      "text": "*Branch*:\n${CIRCLE_BRANCH}"
+#                    },
+#                    {
+#                      "type": "mrkdwn",
+#                      "text": "*When*:\n${date + '%m/%d/%Y %Y}"
+#                    },
+#                    {
+#                      "type": "mrkdwn",
+#                      "text": "*Build*:\n${CIRCLE_BUILD_NUM}"
+#                    },
+#                    {
+#                      "type": "mrkdwn",
+#                      "text": "*Build*:\n${CIRCLE_PROJECT_USERNAME}"
+#                    }
                   ]
                 },
                 {
