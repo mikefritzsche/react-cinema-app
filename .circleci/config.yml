@@ -114,7 +114,7 @@ jobs:
                   "type": "actions",
                   "elements": [
                     {
-                      "type": "Button",
+                      "type": "button",
                       "text": {
                         "type": "plain_text",
                         "text": "View Job"
