@@ -81,7 +81,7 @@ jobs:
                   "type": "header",
                   "text": {
                     "type": "plain_text",
-                    "text": "${CIRCLE_BRANCH} branch deployment to Heroku is complete. 👍",
+                    "text": "$CIRCLE_BRANCH branch deployment to Heroku is complete. :thumbsup:",
                     "emoji": true
                   }
                 },
@@ -90,24 +90,24 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "*Project*:\n${CIRCLE_PROJECT_REPONAME}"
+                      "text": "*Project*:\n$CIRCLE_PROJECT_REPONAME"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Branch*:\n$CIRCLE_BRANCH"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*When*:\n${date + '%m/%d/%Y %Y}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Build*:\n$CIRCLE_BUILD_NUM"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Build*:\n$CIRCLE_PROJECT_USERNAME"
                     }
-#                    {
-#                      "type": "mrkdwn",
-#                      "text": "*Branch*:\n${CIRCLE_BRANCH}"
-#                    },
-#                    {
-#                      "type": "mrkdwn",
-#                      "text": "*When*:\n${date + '%m/%d/%Y %Y}"
-#                    },
-#                    {
-#                      "type": "mrkdwn",
-#                      "text": "*Build*:\n${CIRCLE_BUILD_NUM}"
-#                    },
-#                    {
-#                      "type": "mrkdwn",
-#                      "text": "*Build*:\n${CIRCLE_PROJECT_USERNAME}"
-#                    }
                   ]
                 },
                 {
