@@ -98,7 +98,7 @@ jobs:
                     },
                     {
                       "type": "mrkdwn",
-                      "text": "*When*:\n${date + '%m/%d/%Y %Y}"
+                      "text": "*When*:\n$date + '%m/%d/%Y %Y"
                     },
                     {
                       "type": "mrkdwn",
