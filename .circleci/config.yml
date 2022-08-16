@@ -69,9 +69,8 @@ jobs:
             }
           event: always
   notify-via-slack-custom:
-    executor: slack-executor
-#    context:
-#      - slack-secrets
+    docker:
+      - image: 'cimg/base:stable'
     steps:
       - run: echo "Slack Notification"
       - slack/notify:
@@ -158,8 +157,7 @@ workflows:
 #            - slack-secrets
 
   test-build-and-deploy:
-    - notify-via-slack-custom:
-#        requires:
-#          - deploy-to-heroku
-        context:
-          - slack-secrets
+    jobs:
+      - notify-via-slack-custom:
+          context:
+            - slack-secrets
