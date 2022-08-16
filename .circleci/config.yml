@@ -111,7 +111,7 @@ jobs:
                   ]
                 },
                 {
-                  "type": "Actions",
+                  "type": "actions",
                   "elements": [
                     {
                       "type": "Button",
