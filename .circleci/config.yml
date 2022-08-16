@@ -47,7 +47,7 @@ jobs:
 
 
 
-  notify:
+  notify-via-slack:
     docker:
       - image: 'cimg/base:stable'
     steps:
